@@ -2,5 +2,6 @@ spring:
   redis:
     host: xxx.xxx.xxx
     port: 6379
+    password: xxxxxx
 server:
   port: 81

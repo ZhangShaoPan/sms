@@ -24,6 +24,7 @@ public class SmsSendController {
 
     @GetMapping("/send/{phone}")
     public String code(@PathVariable("phone") String phone) {
+        // 判断redis是否存在该手机号验证码
         String code = redisTemplate.opsForValue().get(phone);
         if (!StringUtils.isEmpty(code)) {
             return "还没有过期";
@@ -34,7 +35,7 @@ public class SmsSendController {
         map.put("code", code);
 
         // 发送验证码
-        boolean isSend = sendSmsService.send(phone, "LTAI4GFYtCsrozEsm3DGj1Lk", map);
+        boolean isSend = sendSmsService.send(phone, "SMS_192530864", map);
         if (isSend) {
             // 发送成功 存储到redis
             redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);

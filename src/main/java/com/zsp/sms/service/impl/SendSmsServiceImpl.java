@@ -29,7 +29,7 @@ public class SendSmsServiceImpl implements SendSmsService {
     public boolean send(String phoneNum, String templateCode, Map<String, Object> code) {
 
         // 连接阿里云
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "xxx", "");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G6ss5W85iT43KmPwcVx", "xxx");
         IAcsClient client = new DefaultAcsClient(profile);
         // 构建请求
         CommonRequest request = new CommonRequest();
@@ -38,7 +38,8 @@ public class SendSmsServiceImpl implements SendSmsService {
         request.setSysDomain("dysmsapi.aliyuncs.com");
         // 不可以修改
         request.setSysVersion("2017-05-25");
-        request.setSysAction("AddSmsSign");
+        // 不可以修改
+        request.setSysAction("SendSms");
         // 自定义的参数(手机号，验证码，签名，模板)
         request.putQueryParameter("PhoneNumbers", phoneNum);// 手机号
         request.putQueryParameter("SignName", "xxx");// (阿里云签名名称)
